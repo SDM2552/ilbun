@@ -15,5 +15,20 @@
 <hr>
 
 <script>
-    document.getElementById('logout').addEventListener('click', ()=> {window.location.href = '/logout';});
+    document.getElementById('logout').addEventListener('click', function(event) {
+        var confirmed = confirm('로그아웃 하시겠습니까?');
+        if (confirmed) {
+            // AJAX 요청으로 로그아웃 처리
+            fetch('/logout', { method: 'POST' })
+                .then(function(response) {
+                    if (response.ok) {
+                        alert('로그아웃 되었습니다');
+                        window.location.href = '/';
+                    } else {
+                        alert('로그아웃에 실패하였습니다');
+                    }
+                });
+        }
+    });
 </script>
+

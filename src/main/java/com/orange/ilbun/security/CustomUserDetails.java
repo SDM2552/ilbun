@@ -12,23 +12,15 @@ import java.util.Collections;
 public class CustomUserDetails implements UserDetails {
 
     private Member member;
+    public Member getMember() {
+        return member;
+    }
 
     public CustomUserDetails(Member member) {
         this.member = member;
         System.out.println("CustomUserDetails 얍 " + member.toString());
     }
 
-    //    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        Collection<GrantedAuthority> collection = new ArrayList<>();
-//        collection.add(new GrantedAuthority() {
-//            @Override
-//            public String getAuthority() {
-//                return member.getRole();
-//            }
-//        });
-//        return collection;
-//    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(member.getRole()));

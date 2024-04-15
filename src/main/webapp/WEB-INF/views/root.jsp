@@ -12,7 +12,7 @@
 <h1>메인 페이지</h1>
 <hr>
 <a href="item/list">상품 목록</a><br>
-<a href="addItems">상품 등록</a><br>
+<a href="item/addItems">상품 등록</a><br>
 <a href="cart">장바구니</a><br>
 <a href="buyPage">구매하기</a><br>
 <a href="user/login">로그인</a><br>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.orange.ilbun.repository.ItemMapper">
+
+    <insert id="insertItem" parameterType="com.orange.ilbun.model.Item">
+		<![CDATA[
+        insert into item (category, name, price, quantity, sales, description, image, image_path, reg_date)
+        values (#{category}, #{name}, #{price}, #{quantity}, #{sales}, #{description}, #{image}, #{imagePath}, now())
+        ]]>
+	</insert>
+</mapper>
