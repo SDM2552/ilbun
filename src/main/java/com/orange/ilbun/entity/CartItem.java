@@ -8,7 +8,6 @@ import javax.persistence.Id;
 
 @Entity
 public class CartItem {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long cartItemId;

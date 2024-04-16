@@ -123,7 +123,8 @@
             if (isChecked) {
                 const itemId = itemRow.querySelector(".removeItemBtn").getAttribute('data-itemId');
                 const itemName = itemRow.querySelector("td:nth-child(1)").textContent;
-                const itemImage = itemRow.querySelector("td:nth-child(2) img").src;
+                const itemImage = itemRow.querySelector("td:nth-child(2) img").getAttribute('alt');
+                const itemImagePath = itemRow.querySelector("td:nth-child(2) img").src;
                 const itemPrice = parseFloat(itemRow.querySelector("td:nth-child(3)").textContent);
                 const itemCount = parseInt(itemRow.querySelector("td:nth-child(4)").textContent);
                 selectedItems.push({
@@ -131,6 +132,7 @@
                     itemId: itemId,
                     itemName: itemName,
                     image: itemImage,
+                    imagePath: itemImagePath,
                     itemPrice: itemPrice,
                     itemCount: itemCount
                 });

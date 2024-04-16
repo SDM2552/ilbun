@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.orange.ilbun.repository.OrderMapper">
+
+	<insert id="save" parameterType="com.orange.ilbun.model.OrderInfo">
+    <![CDATA[
+        INSERT INTO Order_Info (user_id, create_date) VALUES (#{userId}, now())
+        ]]>
+		<selectKey keyProperty="orderId" resultType="java.lang.Long"
+			order="AFTER">
+			SELECT LAST_INSERT_ID() AS orderId
+		</selectKey>
+	</insert>
+
+	<insert id="saveOrderInfo"
+		parameterType="com.orange.ilbun.model.OrderInfo">
+		INSERT INTO Order_Info (user_id, create_date)
+		VALUES
+		(#{userId}, #{createDate})
+	</insert>
+
+	<insert id="saveOrderItems" parameterType="java.util.List">
+		<!-- 반복문을 이용하여 각 OrderItem을 한 번의 INSERT 문으로 저장 -->
+		INSERT INTO Order_Item (order_id, user_id, item_id, item_name, image, image_path,
+		item_price, item_count) VALUES
+		<foreach collection="list" item="item" separator=",">
+			(#{item.orderId}, #{item.userId}, #{item.itemId}, #{item.itemName},
+			#{item.image}, #{item.imagePath}, #{item.itemPrice}, #{item.itemCount})
+		</foreach>
+	</insert>
+
+	<select id="getOrderItemsByOrderId" parameterType="Long"
+		resultType="com.orange.ilbun.model.OrderItem">
+		SELECT * FROM Order_Item WHERE order_id = #{orderId}
+	</select>
+
+	<!-- 주문 정보와 주문 상품 정보를 조회하는 쿼리 -->
+	<select id="getOrderSummary" 
+		resultType="com.orange.ilbun.model.OrderSummary">
+		<![CDATA[
+		SELECT oi.order_id AS orderId, oi.create_date AS createDate,
+		SUM(oit.item_count) AS totalItemCount,
+		SUM(oit.item_price * oit.item_count) AS totalAmount
+		FROM order_info oi
+		JOIN order_item oit ON oi.order_id = oit.order_id
+		WHERE oi.user_id = #{userId}
+		GROUP BY oi.order_id, oi.create_date
+		]]>
+	</select>
+
+
+
+</mapper>
+
+
+

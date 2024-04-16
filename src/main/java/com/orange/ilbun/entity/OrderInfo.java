@@ -11,7 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class OrderInfo {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long orderId;

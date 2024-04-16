@@ -38,4 +38,19 @@ public class OrderController {
         System.out.println("주문 정보: " + selectedItems);
         return "user/order";
     }
+    @PostMapping("/orderSuccess")
+    public String orderComplete(Model model, HttpSession httpSession) {
+        // 세션에서 주문 정보를 가져옴
+        List<OrderItem> selectedItems = (List<OrderItem>) httpSession.getAttribute("selectedItems");
+        // 모델에 주문 정보를 추가하여 화면에 전달
+        model.addAttribute("selectedItems", selectedItems);
+        orderService.addOrder(selectedItems);
+        //주문 완료 후 세션 제거
+        httpSession.removeAttribute("selectedItems");
+        return "redirect:/orderSuccess";
+    }
+    @GetMapping("/orderSuccess")
+    public String orderCompleteAfter() {
+        return "user/orderSuccess";
+    }
 }

@@ -47,14 +47,14 @@
 				"click",
 				function() {
 					var xhr = new XMLHttpRequest();
-					xhr.open("POST", "/orderComplete");
+					xhr.open("POST", "/orderSuccess");
 					xhr.setRequestHeader("Content-Type",
 							"application/json;charset=UTF-8");
 
 					xhr.onload = function() {
 						if (xhr.status === 200) {
 							console.log("주문이 완료되었습니다.");
-							window.location.href = "/orderComplete"; // 페이지 리다이렉트
+							window.location.href = "/orderSuccess"; // 페이지 리다이렉트
 						} else {
 							console.error("주문 요청이 실패했습니다.");
 						}
