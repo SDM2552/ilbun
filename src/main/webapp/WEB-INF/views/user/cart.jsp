@@ -2,16 +2,18 @@
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
+    <script src="../assets/js/color-modes.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>장바구니</title>
 </head>
 <body>
 <c:import url="../header.jsp"/>
+<div class="container-md">
 <h1>장바구니</h1>
-<hr>
-<table>
+<table class="table table-hover">
     <thead>
     <tr>
         <th>상품명</th>
@@ -43,7 +45,7 @@
     총 금액: <span id="totalPrice">0</span>
 </div>
 <button id="purchaseBtn" onclick="purchaseItems()">선택한 상품 구매하기</button>
-
+</div>
 
 <script>
     // 각 아이템의 수량과 가격을 가져와서 총 수량과 총 금액을 계산하는 함수
@@ -158,6 +160,7 @@
         xhr.send(JSON.stringify(selectedItems));
     }
 </script>
-
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

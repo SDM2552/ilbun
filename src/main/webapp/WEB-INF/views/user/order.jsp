@@ -2,16 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="en" data-bs-theme="light">
 <head>
-<meta charset="UTF-8">
-<title>결제 페이지</title>
+	<meta charset="UTF-8">
+	<script src="../assets/js/color-modes.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<title>결제 페이지</title>
 </head>
 <body>
 	<c:import url="../header.jsp" />
+	<div class="container-md">
 	<h1>결제하기</h1>
-	<hr>
-	<table>
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<th>상품명</th>
@@ -24,7 +26,7 @@
 			<c:forEach var="item" items="${selectedItems}">
 				<tr>
 					<td>${item.itemName}</td>
-					<td><img src="${item.image}" width="100" height="100"
+					<td><img src="${item.imagePath}" width="100" height="100"
 						alt="상품 이미지"></td>
 					<td>${item.itemPrice}</td>
 					<td>${item.itemCount}</td>
@@ -41,7 +43,7 @@
 	<hr>
 	
 	<button id="orderButton">결제하기</button>
-
+	</div>
 	<script>
 		document.getElementById("orderButton").addEventListener(
 				"click",

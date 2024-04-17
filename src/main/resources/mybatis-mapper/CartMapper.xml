@@ -39,7 +39,7 @@
 
     <update id="updateItemCount" parameterType="com.orange.ilbun.model.CartItem">
     <![CDATA[
-        UPDATE cart_item SET quantity = quantity + #{cart.count} WHERE cart_id = #{cart.cartId} AND item_id = #{item.itemId}
+        UPDATE cart_item SET quantity = quantity + #{count} WHERE cart_id = #{cart.cartId} AND item_id = #{item.itemId}
         ]]>
 	</update>
 

@@ -61,9 +61,10 @@ public class CartService {
         }
         // 카트 상품 총 개수 증가
         System.out.println("카트id: " + cart.getCartId());
-        cartMapper.updateCartItemCount(cart);
+        cartMapper.updateCartItemCount(cart); // 이 부분을 다시 활성화
         System.out.println("add카트 서비스 완료");
     }
+
 
     public List<Item> getCartAndItems(Long userId) {
         //해당 유저의 카트ID 가져오기

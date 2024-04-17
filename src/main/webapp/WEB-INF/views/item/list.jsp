@@ -9,7 +9,7 @@
 <title>惑前 格废</title>
 </head>
 <body>
-<c:import url="../header.jsp" />
+<c:import url="../headerA.jsp" />
 	<h1>惑前 格废</h1>
 	<hr>
 <table>

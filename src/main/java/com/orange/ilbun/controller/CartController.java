@@ -22,6 +22,7 @@ public class CartController {
     CartService cartService;
 
     @PostMapping("/addToCart") // 물건 장바구니에 넣기
+    @ResponseBody
     public String addToCart(Principal principal, @RequestParam("itemId") Long itemId, @RequestParam("count") int count, Model model) {
         System.out.println("addTocart 로직 시작");
         CustomUserDetails customUserDetails = (CustomUserDetails) ((Authentication) principal).getPrincipal();
@@ -30,8 +31,8 @@ public class CartController {
         model.addAttribute("userId", userId);
         System.out.println("컨트롤러 유저 아이디: "+userId);
         cartService.addCart(userId, itemId, count);
-
-        return "redirect:/user/" + userId + "/cart";
+//        return "redirect:/user/" + userId + "/cart";
+        return "Success";
     }
 
     @GetMapping("/user/{userId}/cart")

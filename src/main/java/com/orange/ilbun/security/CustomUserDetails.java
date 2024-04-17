@@ -18,7 +18,6 @@ public class CustomUserDetails implements UserDetails {
 
     public CustomUserDetails(Member member) {
         this.member = member;
-        System.out.println("CustomUserDetails 얍 " + member.toString());
     }
 
     @Override
@@ -34,6 +33,9 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public String getUsername() {
         return member.getUserId();
+    }
+    public String getName() {
+        return member.getName();
     }
 
     @Override

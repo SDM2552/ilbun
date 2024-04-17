@@ -9,7 +9,7 @@
 <title>로그인 실패</title>
 </head>
 <body>
-<c:import url="../header.jsp" />
+<c:import url="../headerA.jsp" />
 	<h1>로그인 실패</h1>
 	<hr>
 

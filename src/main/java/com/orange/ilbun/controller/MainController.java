@@ -16,8 +16,10 @@ public class MainController {
     @Autowired
     ItemService itemService;
     @GetMapping("/")
-    public String root() {
-        return "root";
+    public String root(Model model) {
+        List<Item> list = itemService.printItemList();
+        model.addAttribute("items", list);
+        return "main";
     }
     @GetMapping("/admin")
     public String admin() {
@@ -28,6 +30,6 @@ public class MainController {
     public String main(Model model) {
         List<Item> list = itemService.printItemList();
         model.addAttribute("items", list);
-        return "main";
+        return "root";
     }
 }

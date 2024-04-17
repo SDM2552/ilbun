@@ -8,7 +8,7 @@
     <title>회원 가입</title>
 </head>
 <body>
-<c:import url="../header.jsp" />
+<c:import url="../headerA.jsp" />
 <h1>회원 가입</h1>
 <hr>
 <form action="join" method="post">

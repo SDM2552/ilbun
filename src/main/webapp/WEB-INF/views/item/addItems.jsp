@@ -8,7 +8,7 @@
     <title>상품 등록</title>
 </head>
 <body>
-<c:import url="../header.jsp"/>
+<c:import url="../headerA.jsp"/>
 <h1>상품 등록</h1>
 <hr>
 <form action="add" method="post" enctype="multipart/form-data">
