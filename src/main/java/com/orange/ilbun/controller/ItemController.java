@@ -1,8 +1,11 @@
 package com.orange.ilbun.controller;
 
 import com.orange.ilbun.model.Item;
+import com.orange.ilbun.model.Member;
+import com.orange.ilbun.security.CustomUserDetails;
 import com.orange.ilbun.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -28,9 +32,13 @@ public class ItemController {
         return "item/list";
     }
     @GetMapping("/item")
-    public String item(@RequestParam Long itemId, Model model) {
+    public String item(@RequestParam Long itemId, Principal principal, Model model) {
         Item item = itemService.itemdetail(itemId);
+//        CustomUserDetails customUserDetails = (CustomUserDetails) ((Authentication) principal).getPrincipal();
+//        Member member = customUserDetails.getMember();
+//        Long id = member.getId();
         model.addAttribute("item", item);
+//        model.addAttribute("id", id);
         System.out.println("item 페이지로 이동");
         return "item/item";
     }

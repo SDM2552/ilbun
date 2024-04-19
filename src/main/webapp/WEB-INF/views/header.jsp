@@ -2,7 +2,7 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" data-bs-theme="light">
 
 
     <script src="../assets/js/color-modes.js"></script>
@@ -32,7 +32,7 @@
                 <c:choose>
                     <c:when test="${not empty SPRING_SECURITY_CONTEXT}">
                         <li class="nav-item">
-                            <a href="/user/<sec:authorize access='isAuthenticated()'><sec:authentication property='principal.username' /></sec:authorize>/cart" class="nav-link link-body-emphasis px-2">장바구니</a>
+                            <a href="/cart" class="nav-link link-body-emphasis px-2">장바구니</a>
                         </li>
                     </c:when>
                     <c:otherwise>
@@ -41,18 +41,18 @@
                 </c:choose>
 
 
-                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">마이페이지</a></li>
+                <li class="nav-item"><a href="/user/orderList" class="nav-link link-body-emphasis px-2">마이페이지</a></li>
                 <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">고객센터</a></li>
             </ul>
             <ul class="nav">
                 <c:choose>
                     <c:when test="${not empty SPRING_SECURITY_CONTEXT}">
                     <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2"><sec:authentication property="principal.name"/> 님 환영합니다.</a></li>
-                        <li class="nav-item"><a href="logout" class="nav-link link-body-emphasis px-2">로그아웃</a></li>
+                        <li class="nav-item"><a href="/logout" class="nav-link link-body-emphasis px-2">로그아웃</a></li>
                     </c:when>
                     <c:otherwise>
                         <li class="nav-item"><a href="/user/login" class="nav-link link-body-emphasis px-2">로그인</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">회원 가입</a></li>
+                        <li class="nav-item"><a href="/join" class="nav-link link-body-emphasis px-2">회원 가입</a></li>
                     </c:otherwise>
                 </c:choose>
 

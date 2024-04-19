@@ -25,15 +25,19 @@ public class CustomUserDetails implements UserDetails {
         return Collections.singleton(new SimpleGrantedAuthority(member.getRole()));
     }
 
+    public Long getId() {
+        return member.getId();
+    }
+    @Override
+    public String getUsername() {
+        return member.getUserId();
+    }
     @Override
     public String getPassword() {
         return member.getPassword();
     }
 
-    @Override
-    public String getUsername() {
-        return member.getUserId();
-    }
+
     public String getName() {
         return member.getName();
     }
@@ -57,4 +61,7 @@ public class CustomUserDetails implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
+
 }

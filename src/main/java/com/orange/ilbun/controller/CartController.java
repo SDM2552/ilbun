@@ -9,13 +9,15 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 
 @Controller
-@SessionAttributes("userId")
+@SessionAttributes("id")
 public class CartController {
 
     @Autowired
@@ -27,30 +29,35 @@ public class CartController {
         System.out.println("addTocart 로직 시작");
         CustomUserDetails customUserDetails = (CustomUserDetails) ((Authentication) principal).getPrincipal();
         Member member = customUserDetails.getMember();
-        Long userId = member.getId();
-        model.addAttribute("userId", userId);
-        System.out.println("컨트롤러 유저 아이디: "+userId);
-        cartService.addCart(userId, itemId, count);
-//        return "redirect:/user/" + userId + "/cart";
+        Long id = member.getId();
+        model.addAttribute("id", id);
+        System.out.println("컨트롤러 유저 아이디: "+id);
+        cartService.addCart(id, itemId, count);
+//        return "redirect:/user/" + id + "/cart";
         return "Success";
     }
 
-    @GetMapping("/user/{userId}/cart")
+    @GetMapping("/cart")
         public String getUserCart(Model model){
-        Long userId = (Long) model.getAttribute("userId");
+        System.out.println("/cart진입");
+//        Long userId = (Long) model.getAttribute("userId");
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Long id = ((CustomUserDetails) userDetails).getId();
+        System.out.println("아이디:"+id);
         // 유저의 카트에 담긴 아이템 정보 가져오기
-        List<Item> itemsInCart = cartService.getCartAndItems(userId);
+        List<Item> itemsInCart = cartService.getCartAndItems(id);
         // 뷰에 아이템 정보 전달
         model.addAttribute("itemsInCart", itemsInCart);
+        model.addAttribute("id", id);
             return "user/cart";
     }
 
     @PostMapping("deleteCartItem")
     public String deleteCartItem(@RequestBody Map<String, Long> requestData) {
-        Long userId = requestData.get("userId");
+        Long id = requestData.get("id");
         Long itemId = requestData.get("itemId");
-        cartService.deleteCartItem(itemId, userId);
-        return "redirect:/user/" + userId + "/cart";
+        cartService.deleteCartItem(itemId, id);
+        return "redirect:/user/" + id + "/cart";
     }
 
 }

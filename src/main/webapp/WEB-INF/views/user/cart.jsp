@@ -33,7 +33,7 @@
             <td><input type="checkbox" class="itemCheckbox" data-price="${item.price}"
                        data-quantity="${item.cartItemQuantity}" checked></td>
             <td>
-                <button class="removeItemBtn" data-itemId="${item.itemId}" data-userId="${userId}">제거</button>
+                <button class="removeItemBtn" data-itemId="${item.itemId}" data-id="${id}">제거</button>
             </td>
         </tr>
     </c:forEach>
@@ -84,8 +84,8 @@
         removeButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const itemId = button.getAttribute('data-itemId');
-                const userId = button.getAttribute('data-userId');
-                deleteCartItem(userId, itemId);
+                const id = button.getAttribute('data-id');
+                deleteCartItem(id, itemId);
             });
         });
 
@@ -94,7 +94,7 @@
     };
 
     // 상품 제거 함수
-    function deleteCartItem(userId, itemId) {
+    function deleteCartItem(id, itemId) {
         // Ajax 요청
         const xhr = new XMLHttpRequest();
         xhr.open('POST', '/deleteCartItem');
@@ -110,11 +110,12 @@
                 console.error('상품 제거 실패');
             }
         };
-        xhr.send(JSON.stringify({userId: userId, itemId: itemId}));
+        xhr.send(JSON.stringify({id: id, itemId: itemId}));
     }
 
     // 현재 페이지의 URL에서 userId를 가져오기
-    const userId = window.location.pathname.split('/')[2];
+    // const id = window.location.pathname.split('/')[2];
+    const id = ${id}
 
     // 선택한 상품 구매 함수
     function purchaseItems() {
@@ -130,7 +131,7 @@
                 const itemPrice = parseFloat(itemRow.querySelector("td:nth-child(3)").textContent);
                 const itemCount = parseInt(itemRow.querySelector("td:nth-child(4)").textContent);
                 selectedItems.push({
-                    userId: userId,
+                    id: id,
                     itemId: itemId,
                     itemName: itemName,
                     image: itemImage,
@@ -144,7 +145,7 @@
 
         // Ajax 요청으로 선택한 상품 정보를 서버로 전송
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/user/' + userId + '/order');
+        xhr.open('POST', '/user/' + id + '/order');
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = function () {
             if (xhr.status === 200) {

@@ -20,14 +20,14 @@ public class CartService {
     ItemMapper itemMapper;
 
     @Transactional
-    public void addCart(Long userId, Long itemId, int count) {
+    public void addCart(Long Id, Long itemId, int count) {
         // 유저 id로 해당 유저의 장바구니 찾기
-        System.out.println("유저 아이디: " + userId);
-        Cart cart = cartMapper.findByUserId(userId);
+        System.out.println("유저 아이디: " + Id);
+        Cart cart = cartMapper.findByUserId(Id);
         // 장바구니가 존재하지 않는다면 새로 생성
         if (cart == null) {
-            System.out.println("카트는 null, userId= " + userId);
-            cart = new Cart(userId);
+            System.out.println("카트는 null, userId= " + Id);
+            cart = new Cart(Id);
             System.out.println("카트 객체: " + cart.toString());
             cartMapper.save(cart);
             System.out.println("cartMapper.save 실행: ");
@@ -66,9 +66,9 @@ public class CartService {
     }
 
 
-    public List<Item> getCartAndItems(Long userId) {
+    public List<Item> getCartAndItems(Long id) {
         //해당 유저의 카트ID 가져오기
-        Long cartId = cartMapper.findCartIdByUserId(userId);
+        Long cartId = cartMapper.findCartIdByUserId(id);
         // 해당 카트에 담긴 아이템 정보와 수량 가져오기
         List<Item> itemsInCart = itemMapper.findItemsByCartId(cartId);
         System.out.println("아이템 리스트: " + itemsInCart);

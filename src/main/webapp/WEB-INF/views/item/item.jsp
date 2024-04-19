@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <head>
     <meta charset="utf-8" />
@@ -24,6 +25,7 @@
 <c:import url="../header.jsp" />
 <!-- 메인화면-->
 <section class="py-5">
+
     <div class="container px-4 px-lg-5 my-5">
         <form action="/addToCart" method="post">
         <div class="row gx-4 gx-lg-5 align-items-center">
@@ -56,7 +58,7 @@
                     <h4 name="totalPrice" id="totalPrice" class="font-weight-bold"></h4>
                 </div>
                 <br>
-                <input type="hidden" id="userId" value="${userId}">
+                <input type="hidden" id="id" value="${id}">
                 <input type="hidden" name="itemId" value="${item.itemId}">
                 <div class="d-flex">
                     <form th:action="@{/logout}" class="d-flex" method="post">
@@ -111,34 +113,45 @@
         $('#addToCartBtn').click(function(e) {
             e.preventDefault();
 
-            var itemId = $('input[name="itemId"]').val();
-            var count = $('#count').val();
-            var userId = $('#userId').val();
+            // 로그인 상태 확인
+            $.get("/api/isAuthenticated", function(data) {
+                if (data.isAuthenticated) {
+                    // 로그인한 경우, 장바구니에 상품 추가
+                    let itemId = $('input[name="itemId"]').val();
+                    let count = $('#count').val();
 
-            $.ajax({
-                url: '/addToCart',
-                type: 'POST',
-                data: {
-                    itemId: itemId,
-                    count: count,
-                    userId: userId
-                },
-                success: function(response) {
-                    if (response === "Success") {
-                        var confirmResult = confirm("상품이 장바구니에 담겼습니다. 지금 확인하시겠습니까?");
-                        if (confirmResult) {
-                            window.location.href = "/user/" + userId + "/cart";
+                    $.ajax({
+                        url: '/addToCart',
+                        type: 'POST',
+                        data: {
+                            itemId: itemId,
+                            count: count,
+                        },
+                        success: function(response) {
+                            if (response === "Success") {
+                                let confirmResult = confirm("상품이 장바구니에 담겼습니다. 지금 확인하시겠습니까?");
+                                if (confirmResult) {
+                                    window.location.href = "/cart";
+                                }
+                            } else {
+                                alert('장바구니에 상품을 추가하는 데 실패했습니다.');
+                            }
+                        },
+                        error: function(error) {
+                            alert('장바구니에 상품을 추가하는 데 실패했습니다.');
                         }
-                    } else {
-                        alert('장바구니에 상품을 추가하는 데 실패했습니다.');
+                    });
+                } else {
+                    // 로그인하지 않은 경우, 로그인 요청
+                    let loginConfirm = confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?");
+                    if (loginConfirm) {
+                        window.location.href = "/user/login";
                     }
-                },
-                error: function(error) {
-                    alert('장바구니에 상품을 추가하는 데 실패했습니다.');
                 }
             });
         });
     });
+
 
 </script>
 </body>

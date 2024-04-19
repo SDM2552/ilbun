@@ -1,8 +1,11 @@
 package com.orange.ilbun.controller;
 
+import com.orange.ilbun.model.Member;
 import com.orange.ilbun.model.OrderItem;
+import com.orange.ilbun.security.CustomUserDetails;
 import com.orange.ilbun.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -19,15 +23,19 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @PostMapping("/user/{userId}/order")
-    public String processOrder(@PathVariable Long userId, @RequestBody List<OrderItem> selectedItems, HttpSession httpSession) {
-        System.out.println("출력 테스트: "+selectedItems);
+    @PostMapping("/user/{id}/order")
+    public String processOrder(@PathVariable Long id, @RequestBody List<OrderItem> selectedItems, HttpSession httpSession, Model model) {
+//        CustomUserDetails customUserDetails = (CustomUserDetails) ((Authentication) principal).getPrincipal();
+//        Member member = customUserDetails.getMember();
+//        Long id = member.getId();
+        model.addAttribute("id", id);
+            System.out.println("출력 테스트: "+selectedItems);
         // 기존 세션에 저장된 selectedItems가 있다면 제거
         httpSession.removeAttribute("selectedItems");
         // 주문 정보를 세션에 저장
         httpSession.setAttribute("selectedItems", selectedItems);
         // 주문 페이지로 이동
-        return "redirect:/user/" + userId + "/cart";
+        return "redirect:/order";
     }
     @GetMapping("/order")
     public String showOrderPage(HttpSession httpSession, Model model) {
