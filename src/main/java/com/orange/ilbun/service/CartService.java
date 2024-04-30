@@ -75,7 +75,12 @@ public class CartService {
         return itemsInCart;
     }
 
-    public void deleteCartItem(Long itemId, Long userId) {
-        cartMapper.deleteItemInCart(itemId, userId);
+    public void deleteCartItem(Long itemId, Long id) {
+        System.out.println("/deleteCartItem아이디2"+id);
+        cartMapper.deleteItemInCart(itemId, id);
+    }
+    public void deleteInCart(Long id, long itemId) {
+        System.out.println("deleteInCart 실행");
+        cartMapper.deleteInCart(id, itemId);
     }
 }

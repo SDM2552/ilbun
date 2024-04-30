@@ -40,32 +40,8 @@
 <!-- 헤더2-->
 <c:import url="header2.jsp"/>
 <!-- 본문-->
-    <div class="container-md conBoader">
-    <h1>주문목록</h1>
-
-        <table class="table">
-            <c:if test="${not empty orderList}">
-                <tr>
-                    <th class="category">카테고리</th>
-                    <th class="name">상품명</th>
-                    <th class="image">상품 이미지</th>
-                    <th class="price">가격</th>
-                </tr>
-                <c:forEach var="orderList" items="${orderList}">
-                    <tr>
-                        <td>${orderList.createDate}</td>
-                        <td>${orderList.itemName}</td>
-                        <td><img src="${orderList.imagePath}" alt="${orderList.image}" width="100" height="100"></td>
-                        <td>${orderList.itemPrice}</td>
-                    </tr>
-                </c:forEach>
-            </c:if>
-            <c:if test="${empty orderList}">
-                <tr>
-                    <td colspan="4">주문하신 상품이 없습니다.</td> <!-- 테이블 전체 폭을 사용 -->
-                </tr>
-            </c:if>
-        </table>
+    <div class="container-md">
+    <h1>마이페이지</h1>
 
     </div>
 </div>

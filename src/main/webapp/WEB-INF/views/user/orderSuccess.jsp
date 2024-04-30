@@ -39,7 +39,8 @@
 	<hr>
 	<h2>주문이 완료되었습니다!</h2>
 	<hr>
-	<button>주문 정보 확인</button> <button>메인으로</button>
+		<button onclick="window.location.href='/user/orderList'">주문 정보 확인</button>
+		<button onclick="window.location.href='/'">메인으로</button>
 	</div>
 
 
@@ -63,8 +64,6 @@
     // 페이지가 로드될 때 호출되는 함수
     window.onload = function() {
         removeSelectedItemsFromSession();
-    };
-
     }
 </script>
 

@@ -55,9 +55,10 @@ public class CartController {
     @PostMapping("deleteCartItem")
     public String deleteCartItem(@RequestBody Map<String, Long> requestData) {
         Long id = requestData.get("id");
+        System.out.println("/deleteCartItem아이디"+id);
         Long itemId = requestData.get("itemId");
         cartService.deleteCartItem(itemId, id);
-        return "redirect:/user/" + id + "/cart";
+        return "redirect:/cart";
     }
 
 }

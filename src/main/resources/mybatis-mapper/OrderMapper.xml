@@ -25,7 +25,7 @@
 		INSERT INTO Order_Item (order_id, user_id, item_id, item_name, image, image_path,
 		item_price, item_count) VALUES
 		<foreach collection="list" item="item" separator=",">
-			(#{item.orderId}, #{item.userId}, #{item.itemId}, #{item.itemName},
+			(#{item.orderId}, #{item.id}, #{item.itemId}, #{item.itemName},
 			#{item.image}, #{item.imagePath}, #{item.itemPrice}, #{item.itemCount})
 		</foreach>
 	</insert>

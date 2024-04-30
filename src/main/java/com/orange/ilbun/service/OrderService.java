@@ -18,7 +18,7 @@ public class OrderService {
     @Transactional
     public void addOrder(List<OrderItem> selectedItems) {
         // OrderInfo 객체 생성
-        OrderInfo orderInfo = new OrderInfo(selectedItems.get(0).getUserId());
+        OrderInfo orderInfo = new OrderInfo(selectedItems.get(0).getId());
         orderMapper.save(orderInfo);
         System.out.println("주문정보: "+orderInfo);
         // OrderItem에 orderId 설정 후 추가

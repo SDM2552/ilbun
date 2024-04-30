@@ -143,3 +143,7 @@ main {
 .nav-link.active {
   color: white !important;
 }
+.conBoader {
+  border: 1px solid black;
+  margin: 20px;
+}
